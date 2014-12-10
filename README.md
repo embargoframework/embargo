@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Getting Started
 ========
 
@@ -25,3 +26,7 @@ foreman start -f Procfile.prod
 ```
 
 View in your browser on port 5000.
+=======
+boilerplaterb
+=============
+>>>>>>> c9b89222711fc36db0417a0c70b50f5fa5b2f4fe
