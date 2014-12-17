@@ -1,17 +1,20 @@
 Getting Started
 
 1. Install [node](http://nodejs.org/)
-1. Install gulp dependencies `(cd frontend && npm install)`
-1. Install [rvm](http://rvm.io/)
-1. Return to root directory `cd ..`
-1. Install ruby 2.1.2 `rvm install 2.1.2`
-1. Install bundler `gem install bundler`
-1. Run `bundle` in this directory
-1. Start the server with `foreman start`
+2. Install [rvm](http://rvm.io/)
+3. Install ruby 2.1.2 `rvm install 2.1.2`
+4. Install bundler `gem install bundler`
+5. Install Embargo `gem install embargo`
+6. Create your application `embargo new your-application`
+7. Move into your project directory `cd your-application`
+8. Start your server `embargo server`
+
+
+
 
 Development Details
 ========
-When you run `foreman start` the server is started and a [gulp task](http://github.com/traitify/homepage/frontend/gulpfile.js) is also started. This allows you to edit the files in the [frontend](http://github.com/traitify/homepage/frontend) directory and see your changes in the website. 
+When you run `embargo server` the server is started and a [gulp task](http://github.com/traitify/homepage/frontend/gulpfile.js) is also started. This allows you to edit the files in the [assets](http://github.com/traitify/embargo/assets) directory and see your changes in the website. 
 
 The gulp task will compile your sass, image, etc. changes and move them to the public folder. The public folder is auto-generated and should not be modified. Any code you place manually in the public folder will be overwritten.
 

@@ -1,5 +1,0 @@
-# robotstxt.org/
-# banish all robots!
-
-User-agent: *
-Disallow: /
