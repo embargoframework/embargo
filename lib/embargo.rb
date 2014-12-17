@@ -38,6 +38,9 @@ class Embargo
 	end
 end
 
+#################
+# Content For
+#################
 class Cuba
   module Render
     def content_for(key, &block)
@@ -54,6 +57,36 @@ class Cuba
     end
   end
 end
+
+#################
+# Blank
+#################
+class Object
+  def blank?
+    respond_to?(:empty?) ? !!empty? : !self
+  end
+end
+
+#################
+# Humanize
+#################
+class String
+  def humanize
+    sub(/\A_+/, '')
+      .tr('_', ' ')
+      .sub(/\A\w/) { |match| match.upcase }
+  end
+end
+
+class Symbol
+  def humanize
+    to_s.humanize
+  end
+end
+
+#################
+# Project Files
+#################
 Dir[Embargo.app_directory+"/lib/*.rb"].each {|file| require file }
 Dir[Embargo.app_directory+"/config/initializers/*.rb"].each {|file| require file }
 Dir[Embargo.app_directory+"/app/models/*.rb"].each {|file| require file }
