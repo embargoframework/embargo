@@ -14,6 +14,7 @@ group :development do
   gem 'shotgun'
   gem 'thin'
   gem 'rack-livereload'
+  gem 'rack-test'
 end
 
 group :production do

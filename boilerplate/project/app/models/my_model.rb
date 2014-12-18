@@ -1,5 +1,7 @@
+require 'ostruct'
+
 class MyModel
-	def find
-		{my_item: "is here"}
+	def self.find
+		OpenStruct.new(my_item: "Hello world!")
 	end
 end
