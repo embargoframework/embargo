@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'embargo'
-  s.version     = '0.1.5'
+  s.version     = '0.2.6'
   s.licenses    = ['MIT']
   s.required_ruby_version = '>= 2.1.2'
   s.summary     = "Embargo"
@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'sass', '= 3.4.9'
   s.add_runtime_dependency 'i18n', '= 0.6.11'
   s.add_runtime_dependency 'activesupport-inflector', '= 0.1.0'
+  s.add_runtime_dependency 'rack-protection', '= 1.5.3'
   s.add_runtime_dependency 'unicorn', '= 4.8.3'
   s.add_development_dependency  'pry', '= 0.10.1'
   s.add_development_dependency  'rack-test', '= 0.10.1'

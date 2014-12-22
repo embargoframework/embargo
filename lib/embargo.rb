@@ -2,6 +2,7 @@ require 'cuba'
 require 'cuba/render'
 require 'tilt/haml'
 require 'haml'
+require "rack/protection"
 
 Cuba.settings[:render] = {
 	template_engine: "haml",
@@ -9,12 +10,13 @@ Cuba.settings[:render] = {
 }
 
 Cuba.plugin(Cuba::Render)
+Cuba.use Rack::Session::Cookie, :secret => "__a_very_long_string__"
+Cuba.use Rack::Protection
 
 class Embargo
 	def self.application
-		Cuba
+		Pages
 	end
-	
 	def self.app_directory
 		@@magis_working_directory ||= Dir.pwd
 	end
@@ -27,15 +29,27 @@ class Embargo
 		project_file_name = Embargo.app_directory + "/" + file_name
 		project_file_exists = File.exist?(project_file_name)
 
-		magis_file_name = Embargo.directory + "/" + file_name
-		magis_file_exists = File.exist?(magis_file_name)
-		
-		if project_file_exists
-			require home_file_name
-		elsif magis_file_exists
-			require magis_file_name
-		end
+    if project_file_exists
+      require project_file_name
+    else
+  		embargo_file_name = Embargo.directory + "/" + file_name
+  		embargo_file_exists = File.exist?(embargo_file_name)
+      if embargo_file_exists
+        require embargo_file_name
+      end
+    end
 	end
+
+  def self.action(&block)
+    @@actions ||= Array.new
+    @@actions.push(block)
+  end
+  def self.actions
+    $actions ||= @@actions
+  end
+  def self.first_load?
+    !$actions
+  end
 end
 
 #################
@@ -84,10 +98,16 @@ class Symbol
   end
 end
 
+class Api < Cuba; end
+class Pages < Cuba; end
+
 #################
 # Project Files
 #################
 Dir[Embargo.app_directory+"/lib/*.rb"].each {|file| require file }
 Dir[Embargo.app_directory+"/config/initializers/*.rb"].each {|file| require file }
 Dir[Embargo.app_directory+"/app/models/*.rb"].each {|file| require file }
-Dir[Embargo.app_directory+"/app/controllers/*_controller.rb"].each {|file| require file }
+Dir[Embargo.app_directory+"/app/serializers/*.rb"].each {|file| require file }
+Embargo.require_file("app/pages_controller.rb")
+Embargo.require_file("app/api_controller.rb")
+Embargo.require_file("app/pages_controller.rb")
