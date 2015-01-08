@@ -104,6 +104,7 @@ class Pages < Cuba; end
 #################
 # Project Files
 #################
+Embargo.require_file("config/app.rb")
 Dir[Embargo.app_directory+"/lib/*.rb"].each {|file| require file }
 Dir[Embargo.app_directory+"/config/initializers/*.rb"].each {|file| require file }
 Dir[Embargo.app_directory+"/app/models/*.rb"].each {|file| require file }
