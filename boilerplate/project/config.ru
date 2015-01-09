@@ -1,3 +1,3 @@
 require "embargo"
 
-run Embargo.application
+run Embargo
