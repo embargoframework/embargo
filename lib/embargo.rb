@@ -13,20 +13,11 @@ Cuba.plugin(Cuba::Render)
 Cuba.use Rack::Session::Cookie, :secret => "__a_very_long_string__"
 Cuba.use Rack::Protection
 
-Dir[__FILE__+"/lib/helpers/*.rb"].each {|file| require file }
+Dir[File.dirname(__FILE__) + "/helpers/*.rb"].each {|file| require file }
 
 class Embargo < Cuba
-  def content_for(key, &block)
-    if block
-      @_content_for ||= {}
-      buf_was = @haml_buffer.buffer
-      @haml_buffer.buffer = ''
-      yield
-      @_content_for[key] = @haml_buffer.buffer
-      @haml_buffer.buffer = buf_was
-    elsif @_content_for
-      @_content_for[key]
-    end
+  def self.directory
+    File.dirname(__FILE__)
   end
 
   def self.app_directory

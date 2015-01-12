@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'embargo'
-  s.version     = '0.4.0'
+  s.version     = '0.4.1'
   s.licenses    = ['MIT']
   s.required_ruby_version = '>= 2.1.2'
   s.summary     = "Embargo"
